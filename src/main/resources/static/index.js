@@ -7,20 +7,23 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 $scope.ProductList = response.data;
             });
     };
-    //
-    // $scope.changeQuantity = function (productID, delta) {
-    //     $http({
-    //         url: contextPath + '/products/change_quantity',
-    //         method: 'GET',
-    //         params: {
-    //             id: productID,
-    //             delta: delta
-    //         }
-    //     }).then(function (response) {
-    //         $scope.loadProducts();
-    //     });
-    // };
-    //
+
+    $scope.changeQuantity = function (productID, delta) {
+        $http({
+            url: contextPath + '/products/change_quantity',
+            method: 'POST',
+            params: {
+                id: productID,
+                delta: delta
+            }
+
+        }).then(function (response) {
+            console.log($scope.url);
+            $scope.loadProducts();
+
+        });
+    };
+
     $scope.deleteProduct = function (productID) {
         $http({
             url: contextPath + '/products/delete',
@@ -32,6 +35,34 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             $scope.loadProducts();
         });
     };
+
+
+        $scope.filterProduct = function () {
+            // console.log("filterProduct");
+            $http({
+                url: contextPath + '/products/filter',
+                method: 'POST',
+                params: {
+                    min: $scope.filter.min,
+                    max: $scope.filter.max
+                }
+            }).then(function (response) {
+
+                $scope.ProductList = response.data;
+                console.log(response.data);
+            });
+        };
+
+
+    $scope.addProduct = function () {
+        console.log($scope.newProduct);
+        $http.post(contextPath + '/productAdd', $scope.newProduct)
+            .then(function (response) {
+                $scope.loadProducts();
+            });
+        $scope.newProduct = null
+    }
+
 
     $scope.loadProducts();
 
