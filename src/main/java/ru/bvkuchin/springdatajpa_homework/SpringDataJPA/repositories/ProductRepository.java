@@ -12,10 +12,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.cost between :minCost and :maxCost")
     List<Product> filterBetween(Double minCost, Double maxCost);
-
-    @Query("select p from Product p where p.cost < :cost")
-    List<Product> filterLessThanCost(Double cost);
-
-    @Query("select p from Product p where p.cost > :cost")
-    List<Product> filterMoreThanCost(Double cost);
+//
+//    @Query("select p from Product p where p.cost < :cost")
+//    List<Product> filterLessThanCost(Double cost);
+//
+//    @Query("select p from Product p where p.cost > :cost")
+//    List<Product> filterMoreThanCost(Double cost);
 }

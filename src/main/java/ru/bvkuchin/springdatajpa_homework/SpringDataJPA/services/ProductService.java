@@ -31,15 +31,16 @@ public class ProductService {
     }
 
     public List<Product> filterProductByCost(Double min, Double max) {
-        if ((min != null) && (max != null)) {
-            return repository.filterBetween(min, max);
-        } else if ((min == null) && (max != null)) {
-            return repository.filterLessThanCost(max);
-        } else if ((min != null) && (max == null)) {
-            return repository.filterMoreThanCost(min);
-        } else {
-            return null;
-        }
+        return repository.filterBetween(min, max);
+//        if ((min != null) && (max != null)) {
+//
+//        } else if ((min == null) && (max != null)) {
+//            return repository.filterLessThanCost(max);
+//        } else if ((min != null) && (max == null)) {
+//            return repository.filterMoreThanCost(min);
+//        } else {
+//            return null;
+//        }
     }
 
 

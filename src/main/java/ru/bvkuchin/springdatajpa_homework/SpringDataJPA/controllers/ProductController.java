@@ -39,11 +39,11 @@ public class ProductController {
     }
 
     @GetMapping("/products/filter")
-    public List<Product> filterProductByCost(@RequestParam(required = false) Double min, @RequestParam(required = false) Double max) {
+    public List<Product> filterProductByCost(@RequestParam(required = false, defaultValue = "0") Double min, @RequestParam(required = false, defaultValue = "999999999") Double max) {
         List<Product> products = service.filterProductByCost(min, max);
-        if (products == null) {
-            throw new IncorrectRequestParameterException("Incorrect query: at least one parameter (min or max) should be provided");
-        }
+//        if (products == null) {
+//            throw new IncorrectRequestParameterException("Incorrect query: at least one parameter (min or max) should be provided");
+//        }
         return products;
 
     }
