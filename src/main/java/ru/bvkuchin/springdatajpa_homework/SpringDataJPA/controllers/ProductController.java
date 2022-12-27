@@ -1,10 +1,7 @@
 package ru.bvkuchin.springdatajpa_homework.SpringDataJPA.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.entities.Product;
 import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.exceptions.IncorrectRequestParameterException;
 import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.exceptions.ResourceNotFoundException;
@@ -38,13 +35,19 @@ public class ProductController {
         service.deleteProductById(id);
     }
 
-    @GetMapping("/products/filter")
+    @PostMapping("/products/filter")
     public List<Product> filterProductByCost(@RequestParam(required = false, defaultValue = "0") Double min, @RequestParam(required = false, defaultValue = "999999999") Double max) {
         List<Product> products = service.filterProductByCost(min, max);
-//        if (products == null) {
-//            throw new IncorrectRequestParameterException("Incorrect query: at least one parameter (min or max) should be provided");
-//        }
         return products;
+    }
 
+    @PostMapping("/products/change_quantity")
+    public void changeQuantity(@RequestParam Integer delta, @RequestParam Long id) {
+        service.changeQuantity(delta, id);
+    }
+
+    @PostMapping("/productAdd")
+    public Product addProduct(@RequestBody Product product) {
+        return service.addProduct(product);
     }
 }

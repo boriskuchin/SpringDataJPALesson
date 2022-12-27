@@ -14,10 +14,11 @@
 
 <body>
 
-<div class="container" ng-controller="indexController">
-    <h3>Корзина продуктов</h3>
-    <table class="table table-hover" cellpadding="0" cellspacing="0">
-        <thead>
+<div ng-controller="indexController">
+    <div class="container">
+        <h3>Корзина продуктов</h3>
+        <table cellpadding="0" cellspacing="0" class="table table-hover">
+            <thead>
             <tr>
                 <td>ID</td>
                 <td>Наименование</td>
@@ -25,8 +26,8 @@
                 <td>Количество</td>
                 <td>Действие</td>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr ng-repeat="p in ProductList">
                 <td>{{p.id}}</td>
                 <td>{{p.name}}</td>
@@ -40,8 +41,41 @@
                     <button class="btn btn-outline-danger btn-sm" ng-click="deleteProduct(p.id)">Удалить</button>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <h3>Фильтр по цене</h3>
+    <form class="container">
+        <div class="form-group ">
+            <label for="min">Min value</label>
+            <input class="form-control" id="min" ng-model="filter.min" placeholder="Min value" step="0.01"
+                   type="number" value="0">
+        </div>
+        <br>
+        <div class="form-group ">
+            <label for="max">Max value</label>
+            <input class="form-control" id="max" ng-model="filter.max" placeholder="Max value" step="0.01"
+                   type="number" value="99999999">
+        </div>
+        <br>
+        <button class="btn btn-primary" ng-click="filterProduct()" type="submit">Фильтровать</button>
+    </form>
+    <br>
+    <h3>Добавить в корзину</h3>
+    <form class="container">
+        <input class="form-control" id="name" ng-model="newProduct.name" placeholder="Наименование"
+               type="text">
+        <br>
+        <input class="form-control" id="cost" ng-model="newProduct.cost" placeholder="Цена"
+               step="0.01" type="number" value="0">
+        <br>
+        <input class="form-control" id="quantity" ng-model="newProduct.quantity" placeholder="Количество"
+               type="number">
+        <br>
+        <button class="btn btn-primary" ng-click="addProduct()" type="submit">Добавить</button>
+    </form>
+
+
 </div>
 </body>
 </html>
