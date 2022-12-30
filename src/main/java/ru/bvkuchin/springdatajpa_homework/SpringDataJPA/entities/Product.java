@@ -23,12 +23,26 @@ public class Product {
     @Column (name = "quantity")
     private Integer quantity;
 
-    public Product() {
+    @Column(name = "secret_data")
+    private String secretData;
+
+    public Product(ProductDTO productDTO) {
+        this.id = productDTO.getId();
+        this.cost = productDTO.getCost();
+        this.name = productDTO.getName();
+        this.quantity = productDTO.getQuantity();
+        this.secretData = "generatedKey";
     }
 
-    public Product(String name, Double cost) {
-        this.name = name;
-        this.cost = cost;
+    public String getSecretData() {
+        return secretData;
+    }
+
+    public void setSecretData(String secretData) {
+        this.secretData = secretData;
+    }
+
+    public Product() {
     }
 
     public String getName() {

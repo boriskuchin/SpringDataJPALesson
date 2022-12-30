@@ -2,9 +2,14 @@ package ru.bvkuchin.springdatajpa_homework.SpringDataJPA.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.entities.Product;
+import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.entities.ProductDTO;
 import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.repositories.ProductRepository;
+import ru.bvkuchin.springdatajpa_homework.SpringDataJPA.repositories.specifications.ProductSpecifications;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,13 +19,34 @@ public class ProductService {
 
     ProductRepository repository;
 
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
+
     @Autowired
     public void setRepository(ProductRepository repository) {
         this.repository = repository;
     }
 
-    public List<Product> getAllProducts() {
-        return repository.findAll();
+
+
+    public Page<Product> find (Double minCost, Double maxCost, String namePart, Long id, Integer page) {
+
+        Specification<Product> specification = Specification.where(null);
+
+        if (minCost != null) {
+            specification= specification.and(ProductSpecifications.costGreaterOrEqualTo(minCost));
+        }
+        if (maxCost != null) {
+            specification= specification.and(ProductSpecifications.costlessOrEqualTo(maxCost));
+        }
+        if (namePart != null) {
+            specification = specification.and(ProductSpecifications.nameLike(namePart));
+        }
+        if (id != null) {
+            specification = specification.and(ProductSpecifications.idEqualTo(id));
+        }
+        return repository.findAll(specification, PageRequest.of(page - 1, 10));
     }
 
     public Optional<Product> getProductById(Long id) {
