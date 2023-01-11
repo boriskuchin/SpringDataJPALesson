@@ -15,9 +15,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     @Query("select p from Product p where p.cost between :minCost and :maxCost")
     public List<Product> filterBetween(Double minCost, Double maxCost);
 
-    @Modifying
-    @Query("update Product p set p.quantity = p.quantity + :delta where p.id = :id")
-    public void updateQuantityById(Integer delta, Long id);
+//    @Modifying
+//    @Query("update Product p set p.quantity = p.quantity + :delta where p.id = :id")
+//    public void updateQuantityById(Integer delta, Long id);
 
     public Product getProductsById(Long id);
 }

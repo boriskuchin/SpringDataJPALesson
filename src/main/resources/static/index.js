@@ -1,5 +1,7 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
     const contextPath = 'http://localhost:8180/app/v1/products';
+    const cartPath = 'http://localhost:8180/app/v1/cart';
+
 
     $scope.loadProducts = function () {
         $http({
@@ -18,23 +20,6 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
-
-
-
-    $scope.changeQuantity = function (productID, delta) {
-        $http({
-            url: contextPath ,
-            method: 'PUT',
-            params: {
-                id: productID,
-                delta: delta
-            }
-
-        }).then(function (response) {
-            $scope.loadProducts();
-
-        });
-    };
 
     $scope.deleteProduct = function (productID) {
         $http({
@@ -59,6 +44,33 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     }
 
 
+    $scope.addToCart = function (productID) {
+        $http({
+            url: cartPath,
+            method: 'PUT',
+            params: {
+                id: productID
+            }
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    };
+
+
+    $scope.loadCart = function () {
+        $http({
+            url: cartPath ,
+            method: 'get',
+
+        }).then(function (response) {
+            console.log(response.data)
+            $scope.CartList = response.data;
+        });
+    };
+
+
     $scope.loadProducts();
+    $scope.loadCart();
+
 
 });
