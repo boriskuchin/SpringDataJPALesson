@@ -46,7 +46,7 @@ public class ProductService {
         if (id != null) {
             specification = specification.and(ProductSpecifications.idEqualTo(id));
         }
-        return repository.findAll(specification, PageRequest.of(page - 1, 10));
+        return repository.findAll(specification, PageRequest.of(page - 1, 50));
     }
 
     public Optional<Product> getProductById(Long id) {
@@ -61,13 +61,13 @@ public class ProductService {
         return repository.filterBetween(min, max);
     }
 
-    @Transactional
-    public void changeQuantity(Integer delta, Long id) {
-        Product p = repository.getProductsById(id);
-        if ((p.getQuantity() > 0) || ((p.getQuantity() == 0) && delta>0)) {
-            repository.updateQuantityById(delta, id);
-        }
-    }
+//    @Transactional
+//    public void changeQuantity(Integer delta, Long id) {
+//        Product p = repository.getProductsById(id);
+//        if ((p.getQuantity() > 0) || ((p.getQuantity() == 0) && delta>0)) {
+//            repository.updateQuantityById(delta, id);
+//        }
+//    }
 
     public Product  addProduct(Product product) {
         return repository.saveAndFlush(product);

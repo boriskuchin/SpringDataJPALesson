@@ -12,13 +12,13 @@ public class ProductDTO {
 
     private Double cost;
 
-    private Integer quantity;
+//    private Integer quantity;
 
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
         this.cost = product.getCost();
-        this.quantity = product.getQuantity();
+//        this.quantity = product.getQuantity();
     }
 
     public Long getId() {
@@ -45,11 +45,11 @@ public class ProductDTO {
         this.cost = cost;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+//    public Integer getQuantity() {
+//        return quantity;
+//    }
+//
+//    public void setQuantity(Integer quantity) {
+//        this.quantity = quantity;
+//    }
 }

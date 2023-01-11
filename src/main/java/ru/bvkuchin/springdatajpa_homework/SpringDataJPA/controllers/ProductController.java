@@ -42,10 +42,10 @@ public class ProductController {
         service.deleteProductById(id);
     }
 
-    @PutMapping
-    public void changeQuantity(@RequestParam Integer delta, @RequestParam Long id) {
-        service.changeQuantity(delta, id);
-    }
+//    @PutMapping
+//    public void changeQuantity(@RequestParam Integer delta, @RequestParam Long id) {
+//        service.changeQuantity(delta, id);
+//    }
 
     @PostMapping
     public Product addProduct(@RequestBody ProductDTO productDTO) {

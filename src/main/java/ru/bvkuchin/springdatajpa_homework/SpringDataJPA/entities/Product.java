@@ -19,9 +19,9 @@ public class Product {
     @Column(name = "cost")
     private Double cost;
 
-
-    @Column (name = "quantity")
-    private Integer quantity;
+//
+//    @Column (name = "quantity")
+//    private Integer quantity;
 
     @Column(name = "secret_data")
     private String secretData;
@@ -30,8 +30,15 @@ public class Product {
         this.id = productDTO.getId();
         this.cost = productDTO.getCost();
         this.name = productDTO.getName();
-        this.quantity = productDTO.getQuantity();
+//        this.quantity = productDTO.getQuantity();
         this.secretData = "generatedKey";
+    }
+
+    public Product(Long id, String name, Double cost, String secretData) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.secretData = secretData;
     }
 
     public String getSecretData() {
@@ -70,13 +77,13 @@ public class Product {
         this.cost = cost;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+//    public Integer getQuantity() {
+//        return quantity;
+//    }
+//
+//    public void setQuantity(Integer quantity) {
+//        this.quantity = quantity;
+//    }
 
     @Override
     public String toString() {
@@ -84,7 +91,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
-                ", quantity=" + quantity +
+//                ", quantity=" + quantity +
                 '}';
     }
 }
